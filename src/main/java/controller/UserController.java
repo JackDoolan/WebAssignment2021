@@ -45,20 +45,22 @@ public class UserController extends HttpServlet {
         String address = request.getParameter("userAddress");
 
         User u1 = new User(email, n, address);
-
+        System.out.println(u1.getName());
         try {
             ArrayList<User> users = UserDAO.instance.list();
-            //UserDAO.instance.save(u1);
-            //String check = "mcurran@ait.ie";
-            //User user = UserDAO.instance.selectOne(check);
-            //System.out.println(u1.getName());
+
+//            UserDAO.instance.save(u1);
+//            String check = "ray@gmail.ie";
+//            User user = UserDAO.instance.selectOne(check);
+//            System.out.println(u1.getName());
+
             request.setAttribute("userList", users);
             request.getRequestDispatcher("showUser.jsp").forward(request, response);
         } catch (Exception e) {
             System.out.println("information could not be retrieved");
             // TODO Auto-generated catch block
             //e.printStackTrace();
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("showBooks.jsp").forward(request, response);
         }
 
 
