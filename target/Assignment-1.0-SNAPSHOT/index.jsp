@@ -1,13 +1,23 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<form method="post" action="UserController">
+    Email: <input type="email" name="userEmail"/><br>
+    Name: <input type="text" name="userName"/> <br>
+    Address: <input type="text" name="userAddress"/> <br>
+    <input type="submit" value="submit form"/>
+</form>
+<br><br><br><br>
+<form method="post" action="BookController">
+    Title: <input type="text" name="bookTitle"/><br>
+    Author: <input type="text" name="bookAuthor"/><br>
+    <input type="submit" value="show books"/>
+</form>
 </body>
 </html>
