@@ -50,32 +50,31 @@ public class UserController extends HttpServlet {
         User u1 = new User(email, n, address);
         System.out.println(u1.getName());
         try {
-            System.out.println("Try  starts");
+
             ArrayList<User> users = UserDAO.instance.list();
 
-            System.out.println(UserDAO.instance.list());
 
-            System.out.println("EMAIL ENTERED: " +email);
+
+           //For loop to save new entries into database
             int count = 0;
-            for(int i=-0; i<users.size(); i++) {
-                System.out.println("For loop starts");
+            for(int i=-0; i<users.size(); i++)
+            {
+                if (email.equals(users.get(i).getEmail()))
+                {
+                    count ++;
 
-
-                if (email.equals(users.get(i).getEmail())) {
-
-                    System.out.println("User " + users.get(i).getName() + "Was found");
-
-                    count++;
-                }
+                                   }
             }
                 if(count ==0)
                 {
-                    System.out.println("NO USER " + email);
-                    System.out.println("USER ATTEMPTED TO SAVE " + u1.getEmail() +", "+ u1.getName() +", "+u1.getAddress());
         UserDAO.instance.save(u1.getEmail(),u1.getName(),u1.getAddress());
 
-                    System.out.println("USER " +email+ "SAVED");
                 }
+
+
+
+
+
 
 //            UserDAO.instance.save(u1);
 //            String check = "jack@gmail.com";

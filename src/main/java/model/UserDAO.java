@@ -38,8 +38,10 @@ public enum UserDAO {
 
             if(rs.getString("email").equals(email)) {
 
-                User u = new User(rs.getString("email"),rs.getString("name"), rs.getString("address"));
+                User u = new User(rs.getString("EMAIL"),rs.getString("NAME"), rs.getString("ADDRESS"));
+
                 return u;
+
             }
 
         }
