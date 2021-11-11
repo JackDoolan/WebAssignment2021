@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.User;
 import model.UserDAO;
 
+
 /**
  * Servlet implementation class UserController
  */
@@ -19,6 +20,8 @@ import model.UserDAO;
 public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     ArrayList<User> users = null;
+//    UserDAO userDAO;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -47,20 +50,46 @@ public class UserController extends HttpServlet {
         User u1 = new User(email, n, address);
         System.out.println(u1.getName());
         try {
+            System.out.println("Try  starts");
             ArrayList<User> users = UserDAO.instance.list();
 
+            System.out.println(UserDAO.instance.list());
+
+            System.out.println("EMAIL ENTERED: " +email);
+            int count = 0;
+            for(int i=-0; i<users.size(); i++) {
+                System.out.println("For loop starts");
+
+
+                if (email.equals(users.get(i).getEmail())) {
+
+                    System.out.println("User " + users.get(i).getName() + "Was found");
+
+                    count++;
+                }
+            }
+                if(count ==0)
+                {
+                    System.out.println("NO USER " + email);
+                    System.out.println("USER ATTEMPTED TO SAVE " + u1.getEmail() +", "+ u1.getName() +", "+u1.getAddress());
+        UserDAO.instance.save(u1.getEmail(),u1.getName(),u1.getAddress());
+
+                    System.out.println("USER " +email+ "SAVED");
+                }
+
 //            UserDAO.instance.save(u1);
-//            String check = "ray@gmail.ie";
+//            String check = "jack@gmail.com";
 //            User user = UserDAO.instance.selectOne(check);
 //            System.out.println(u1.getName());
 
             request.setAttribute("userList", users);
             request.getRequestDispatcher("showUser.jsp").forward(request, response);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.out.println("information could not be retrieved");
             // TODO Auto-generated catch block
             //e.printStackTrace();
-            request.getRequestDispatcher("showBooks.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
 
 
