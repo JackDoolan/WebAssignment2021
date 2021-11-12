@@ -45,31 +45,49 @@ public class UserController extends HttpServlet {
         // TODO Auto-generated method stub
         String email = request.getParameter("userEmail");
         String n = request.getParameter("userName");
-        String address = request.getParameter("userAddress");
+        String password = request.getParameter("userPassword");
 
-        User u1 = new User(email, n, address);
+        User u1 = new User(email, n, password);
         System.out.println(u1.getName());
         try {
 
             ArrayList<User> users = UserDAO.instance.list();
 
-
+            ArrayList<User> currentUser = new ArrayList<User>();
 
            //For loop to save new entries into database
             int count = 0;
-            for(int i=-0; i<users.size(); i++)
+            for(int i=0; i<users.size(); i++)
             {
                 if (email.equals(users.get(i).getEmail()))
-                {
-                    count ++;
+                { count++;
+                   if(password.equals(users.get(i).getpassword()))
+                   {
+                       System.out.println("Password check");
 
-                                   }
-            }
-                if(count ==0)
-                {
-        UserDAO.instance.save(u1.getEmail(),u1.getName(),u1.getAddress());
+                       System.out.println("Arraylist check");
+                currentUser.add(users.get(i));
+                       System.out.println("Adding current user to arraylist");
+                       request.setAttribute("userList", currentUser);
+                       System.out.println("userlist = currentuser");
+                       request.getRequestDispatcher("showUser.jsp").forward(request, response);
+                   }
+                   else{
+                       System.out.println("Password is incorrect");
+                       request.getRequestDispatcher("index.jsp").forward(request, response);
+                   }
 
                 }
+
+            }
+                if(!email.equals("") && !password.equals("") & !n.equals("") && count ==0)
+                {
+        UserDAO.instance.save(u1.getEmail(),u1.getName(),u1.getpassword());
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                }else {
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                }
+
 
 
 
@@ -81,8 +99,7 @@ public class UserController extends HttpServlet {
 //            User user = UserDAO.instance.selectOne(check);
 //            System.out.println(u1.getName());
 
-            request.setAttribute("userList", users);
-            request.getRequestDispatcher("showUser.jsp").forward(request, response);
+
         }
         catch (Exception e) {
             System.out.println("information could not be retrieved");

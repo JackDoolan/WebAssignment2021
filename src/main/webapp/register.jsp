@@ -7,21 +7,16 @@
     <title>Insert title here</title>
 </head>
 <body>
+<h1>Register Here</h1>
 <form method="post" action="UserController">
     Email: <input type="email" name="userEmail"/><br>
     Name: <input type="text" name="userName"/> <br>
     Password: <input type="password" name="userPassword"/> <br>
     <input type="submit" value="submit form"/>
 </form>
-<br>
 
-<a href="register.jsp"> <h3>Click Here to Register</h3></a>
-<br><br><br><br>
 
-<form method="post" action="BookController">
-    Title: <input type="text" name="bookTitle"/><br>
-    Author: <input type="text" name="bookAuthor"/><br>
-    <input type="submit" value="show books"/>
-</form>
 </body>
 </html>
+
+//Both index and JSP both run trough usercontroller so how to ensure that only register returns to index

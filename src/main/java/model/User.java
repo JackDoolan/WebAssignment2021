@@ -4,12 +4,12 @@ public class User {
     private String email;
 
     private String name;
-    private String address;
+    private String password;
 
     public User(String e, String n, String a) {
         this.email = e;
         this.name = n;
-        this.address=a;
+        this.password=a;
     }
     public String getEmail() {
         return email;
@@ -21,15 +21,15 @@ public class User {
     public String getName() {
         return this.name;
     }
-    public String getAddress() {
-        return this.address;
+    public String getpassword() {
+        return this.password;
     }
 
     public void setName(String n) {
         this.name = n;
     }
-    public void setAddress(String a) {
-        this.address = a;
+    public void setpassword(String a) {
+        this.password = a;
     }
 
 }

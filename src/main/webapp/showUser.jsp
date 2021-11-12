@@ -10,8 +10,8 @@
 </head>
 <body>
 <c:forEach items="${userList}" var="user">
+    <c:out value="Hello :"></c:out>
     <c:out value="${user.name}"/>
-    <c:out value="${user.address}"/> <br>
 </c:forEach>
 
 </body>

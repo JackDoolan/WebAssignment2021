@@ -10,10 +10,14 @@
 <form method="post" action="UserController">
     Email: <input type="email" name="userEmail"/><br>
     Name: <input type="text" name="userName"/> <br>
-    Address: <input type="text" name="userAddress"/> <br>
+    Password: <input type="password" name="userPassword"/> <br>
     <input type="submit" value="submit form"/>
 </form>
+<br>
+
+<a href="register.jsp"> <h3>Click Here to Register</h3></a>
 <br><br><br><br>
+
 <form method="post" action="BookController">
     Title: <input type="text" name="bookTitle"/><br>
     Author: <input type="text" name="bookAuthor"/><br>

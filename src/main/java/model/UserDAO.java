@@ -38,7 +38,7 @@ public enum UserDAO {
 
             if(rs.getString("email").equals(email)) {
 
-                User u = new User(rs.getString("EMAIL"),rs.getString("NAME"), rs.getString("ADDRESS"));
+                User u = new User(rs.getString("EMAIL"),rs.getString("NAME"), rs.getString("PASSWORD"));
 
                 return u;
 
@@ -49,15 +49,15 @@ public enum UserDAO {
     }
 
 
-    public void save(String email, String name, String address) throws Exception{
+    public void save(String email, String name, String password) throws Exception{
 
         Connection conn = getConnection();
-        PreparedStatement psmt = conn.prepareStatement("INSERT INTO USER VALUES('"+email+"','"+name+"','"+address+"' )");
+        PreparedStatement psmt = conn.prepareStatement("INSERT INTO USER VALUES('"+email+"','"+name+"','"+password+"' )");
 
 
 //        psmt.setString(1, u.getEmail());
 //        psmt.setString(2, u.getName());
-//        psmt.setString(3,u.getAddress());
+//        psmt.setString(3,u.getPassword());
         psmt.executeUpdate();
         psmt.close();
         conn.close();
@@ -72,7 +72,7 @@ public enum UserDAO {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM USER");
         while (rs.next()) {
-            User u = new User(rs.getString("email"), rs.getString("name"), rs.getString("address"));
+            User u = new User(rs.getString("email"), rs.getString("name"), rs.getString("password"));
             listOfUsers.add(u);
 
         }
