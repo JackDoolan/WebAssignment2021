@@ -41,20 +41,31 @@ public class BookController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        UserController userController = new UserController();
+
         String t = request.getParameter("bookTitle");
         String a = request.getParameter("bookAuthor");
+         String userEmail = request.getParameter("userEmail");
 
-        ArrayList<Book> listOfBooks = new ArrayList();
 
-        Book b1 = new Book(t, a);
-        listOfBooks.add(b1);
-        System.out.println("DO POST BookController");
+        ArrayList<Book> listOfBooks = null;
+
+
+
         try {
-            System.out.println("Try is Tried?");
-            System.out.println("penis" + userController.getCurrentUserEmail());
-           System.out.println(BookDAO.instance.selectOne(userController.getCurrentUserEmail()));
-            System.out.println("Try is ran");
+
+            if(!t.equals("") && !a.equals(""))
+            {
+                BookDAO.save(userEmail,t,a);
+                listOfBooks = BookDAO.instance.selectOne(userEmail);
+                request.setAttribute("myList", listOfBooks);
+                request.getRequestDispatcher("showBooks.jsp").forward(request, response);
+
+            }
+            listOfBooks = BookDAO.instance.selectOne(userEmail);
+
+
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,6 +73,45 @@ public class BookController extends HttpServlet {
 
         request.setAttribute("myList", listOfBooks);
         request.getRequestDispatcher("showBooks.jsp").forward(request, response);
+    }
+
+
+
+    /**
+     * @see HttpServlet#doDelete(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+
+
+
+//        String userEmail = request.getParameter("userEmail");
+
+
+//        ArrayList<Book> listOfBooks = null;
+
+
+
+        try {
+
+
+            String bookToDelete = request.getParameter("bookToDelete");
+            if(!bookToDelete.equals("")){
+                System.out.println("Book to delete is picked up as not blank");
+               /* System.out.println(userEmail+ "|||" + bookToDelete);*/
+//                BookDAO.instance.delete(userEmail, bookToDelete);
+                System.out.println("Book is deleted");
+//                request.setAttribute("myList", listOfBooks);
+//                request.getRequestDispatcher("showBooks.jsp").forward(request, response);
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        request.setAttribute("myList", listOfBooks);
+//        request.getRequestDispatcher("showBooks.jsp").forward(request, response);
     }
 
 }

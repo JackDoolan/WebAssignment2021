@@ -21,7 +21,7 @@ import model.UserDAO;
 public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     ArrayList<User> users = null;
-    String currentUserEmail = "tester@gmail.com";
+    String currentUserEmail="";
 
     /**
      * @see HttpServlet#HttpServlet()

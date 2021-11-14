@@ -14,22 +14,42 @@
 <c:forEach items="${userList}" var="user">
     <c:out value="Hello :"></c:out>
     <c:out value="${user.name}"/><br>
-    <c:out value="${user.email}"/>
 </c:forEach>
 <br>
 <h3>Add a Book</h3>
-
+//Form to add new book
 <form method="post" action="BookController">
+    <c:forEach items="${userList}" var="user">
     Title: <input type="text" name="bookTitle"/><br>
     Author: <input type="text" name="bookAuthor"/><br>
-
-    //GET THE USER EMAIL INTO HERE
-    Email: <input type="text" name="userEmail"/>
-    <input type="submit" value="show books"/>
+ <input type="hidden" value="${user.email}" name="userEmail"/>
+    </c:forEach>
+    <input type="submit" value="Add Book">
 </form>
 
 <br><br>
-<h2></h2>
+//Form to view all books for logged in user.
+<form method="post" action="BookController">
+<c:forEach items="${userList}" var="user">
+    <input type="hidden" name="bookTitle"/><br>
+    <input type="hidden" name="bookAuthor"/><br>
+    <input type="hidden" value="${user.email}" name="userEmail"/>
+</c:forEach>
+    <input type="submit" value="Show Books">
+</form>
+
+
+
+<h3>Book to delete</h3>
+<form method="" action="BookController">
+Book Title: <input type="text" name="bookToDelete"/><br>
+<input type="submit" value="submit form"/>
+</form>
+
+
+
+
+
 
 </body>
 </html>

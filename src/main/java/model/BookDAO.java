@@ -12,7 +12,7 @@ public enum BookDAO {
     //Update - Update - update
     //Delete - Delete - remove
 
-    public Connection getConnection() throws Exception {
+    public static Connection getConnection() throws Exception {
 
 
         Class.forName("org.hsqldb.jdbcDriver");
@@ -24,34 +24,45 @@ public enum BookDAO {
         return con;
     }
 
-    public Book selectOne(String email) throws Exception {
+    public ArrayList<Book> selectOne(String email) throws Exception {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM USE BOOK where USEREMAIL ='" + email +"'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM BOOK where USEREMAIL ='" + email +"'");
+        ArrayList<Book> books = new ArrayList<>();
         while(rs.next()) {
 
             if(rs.getString("USEREMAIL").equals(email)) {
 
                 Book b = new Book(rs.getString("BOOKTITLE"), rs.getString("BOOKAUTHOR"));
+books.add(b);
 
-                return b;
 
             }
 
         }
-        return null;
+        return books;
+
     }
 
 
-    public void save(String email, String name, String password) throws Exception{
+    public static void save(String email, String title, String author) throws Exception{
 
         Connection conn = getConnection();
-        PreparedStatement psmt = conn.prepareStatement("INSERT INTO USER VALUES('"+email+"','"+name+"','"+password+"' )");
+           PreparedStatement psmt = conn.prepareStatement("INSERT INTO BOOK VALUES(null, +'"+email+"','"+title+"','"+author+"')");
+        psmt.executeUpdate();
+        psmt.close();
+        conn.close();
+    }
 
 
-//        psmt.setString(1, u.getEmail());
-//        psmt.setString(2, u.getName());
-//        psmt.setString(3,u.getPassword());
+
+    public static void delete(String email, String title) throws Exception{
+
+        Connection conn = getConnection();
+        PreparedStatement psmt = conn.prepareStatement("DELETE FROM BOOK WHERE USEREMAIL = '"+email+"' AND BOOKTITLE = '"+title+"'");
+
+
+
         psmt.executeUpdate();
         psmt.close();
         conn.close();
