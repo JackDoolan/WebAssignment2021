@@ -19,4 +19,3 @@
 </body>
 </html>
 
-//Both index and JSP both run trough usercontroller so how to ensure that only register returns to index

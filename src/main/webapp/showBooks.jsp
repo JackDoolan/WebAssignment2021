@@ -12,7 +12,6 @@
 <c:forEach items="${myList}" var="book">
   Book Title: <c:out value="${book.title }"/><br>
   Book Author: <c:out value="${book.author}"/><br>
-
 </c:forEach>
 </body>
 </html>

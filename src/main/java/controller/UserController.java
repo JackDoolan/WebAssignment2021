@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Book;
 import model.User;
 import model.UserDAO;
 
@@ -20,7 +21,7 @@ import model.UserDAO;
 public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     ArrayList<User> users = null;
-//    UserDAO userDAO;
+    String currentUserEmail = "tester@gmail.com";
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,60 +49,54 @@ public class UserController extends HttpServlet {
         String password = request.getParameter("userPassword");
 
         User u1 = new User(email, n, password);
-        System.out.println(u1.getName());
         try {
 
             ArrayList<User> users = UserDAO.instance.list();
 
             ArrayList<User> currentUser = new ArrayList<User>();
 
-           //For loop to save new entries into database
+            //For loop to save new entries into database
             int count = 0;
-            for(int i=0; i<users.size(); i++)
-            {
-                if (email.equals(users.get(i).getEmail()))
-                { count++;
-                   if(password.equals(users.get(i).getpassword()))
-                   {
-                       System.out.println("Password check");
+            for (int i = 0; i < users.size(); i++) {
+                if (email.equals(users.get(i).getEmail())) {
+                    count++;
+                    if (password.equals(users.get(i).getpassword())) {
+                        //CODE FOR BOOKS---------------------------------------------------------------------
+                        //CODE FOR BOOKS---------------------------------------------------------------------
 
-                       System.out.println("Arraylist check");
-                currentUser.add(users.get(i));
-                       System.out.println("Adding current user to arraylist");
-                       request.setAttribute("userList", currentUser);
-                       System.out.println("userlist = currentuser");
-                       request.getRequestDispatcher("showUser.jsp").forward(request, response);
-                   }
-                   else{
-                       System.out.println("Password is incorrect");
-                       request.getRequestDispatcher("index.jsp").forward(request, response);
-                   }
+                        //CODE FOR USERS---------------------------------------------------------------------
+                        currentUser.add(users.get(i));
+                        currentUserEmail = users.get(i).getEmail();
+                        request.setAttribute("userList", currentUser);
+                        request.getRequestDispatcher("showUser.jsp").forward(request, response);
+                        //CODE FOR USERS---------------------------------------------------------------------
+                    } else {
+                        System.out.println("Password is incorrect");
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                    }
 
                 }
 
             }
-                if(!email.equals("") && !password.equals("") & !n.equals("") && count ==0)
-                {
-        UserDAO.instance.save(u1.getEmail(),u1.getName(),u1.getpassword());
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                }else {
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                }
+            if (!email.equals("") && !password.equals("") & !n.equals("") && count == 0) {
+                UserDAO.instance.save(u1.getEmail(), u1.getName(), u1.getpassword());
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
 
 
-
-
-
-
-
+//
+//
+//            request.setAttribute("myList", listOfBooks);
+//            request.getRequestDispatcher("showUser.jsp").forward(request, response);
 //            UserDAO.instance.save(u1);
 //            String check = "jack@gmail.com";
 //            User user = UserDAO.instance.selectOne(check);
 //            System.out.println(u1.getName());
 
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("information could not be retrieved");
             // TODO Auto-generated catch block
             //e.printStackTrace();
@@ -110,5 +105,9 @@ public class UserController extends HttpServlet {
 
 
     }
+    public String getCurrentUserEmail() {
+        return currentUserEmail;
+    }
+
 
 }

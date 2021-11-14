@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Book;
+import model.BookDAO;
 import model.User;
 
 /**
@@ -40,6 +41,7 @@ public class BookController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
+        UserController userController = new UserController();
         String t = request.getParameter("bookTitle");
         String a = request.getParameter("bookAuthor");
 
@@ -47,10 +49,16 @@ public class BookController extends HttpServlet {
 
         Book b1 = new Book(t, a);
         listOfBooks.add(b1);
-        Book b2 = new Book("Killing Floor", "Lee Child");
-        Book b3 = new Book("Circle of Friends", "Maeve Binchy");
-        listOfBooks.add(b2);
-        listOfBooks.add(b3);
+        System.out.println("DO POST BookController");
+        try {
+            System.out.println("Try is Tried?");
+            System.out.println("penis" + userController.getCurrentUserEmail());
+           System.out.println(BookDAO.instance.selectOne(userController.getCurrentUserEmail()));
+            System.out.println("Try is ran");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         request.setAttribute("myList", listOfBooks);
         request.getRequestDispatcher("showBooks.jsp").forward(request, response);

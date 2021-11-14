@@ -9,7 +9,6 @@
 <body>
 <form method="post" action="UserController">
     Email: <input type="email" name="userEmail"/><br>
-    Name: <input type="text" name="userName"/> <br>
     Password: <input type="password" name="userPassword"/> <br>
     <input type="submit" value="submit form"/>
 </form>
@@ -18,10 +17,6 @@
 <a href="register.jsp"> <h3>Click Here to Register</h3></a>
 <br><br><br><br>
 
-<form method="post" action="BookController">
-    Title: <input type="text" name="bookTitle"/><br>
-    Author: <input type="text" name="bookAuthor"/><br>
-    <input type="submit" value="show books"/>
-</form>
+
 </body>
 </html>
