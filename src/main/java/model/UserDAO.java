@@ -82,4 +82,23 @@ public enum UserDAO {
         return listOfUsers;
     }
 
+    public void deleteUser(String email) throws Exception
+    {
+
+        Connection conn = getConnection();
+        System.out.println("DELETE USER: " + email);
+
+
+        PreparedStatement psmt = conn.prepareStatement("DELETE FROM BOOK WHERE USEREMAIL = '"+email+"'");
+        PreparedStatement psmt2 = conn.prepareStatement("DELETE FROM USER WHERE EMAIL = '"+email+"'");
+        System.out.println(psmt);
+
+
+        psmt.executeUpdate();
+        psmt2.executeUpdate();
+        psmt2.close();
+        psmt.close();
+        conn.close();
+    }
+
 }

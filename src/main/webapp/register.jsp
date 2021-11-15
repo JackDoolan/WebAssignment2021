@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Register Here</h1>
-<form method="post" action="UserController">
+<form method="post" action="RegisterController">
     Email: <input type="email" name="userEmail"/><br>
     Name: <input type="text" name="userName"/> <br>
     Password: <input type="password" name="userPassword"/> <br>

@@ -35,6 +35,7 @@ public class BookController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         response.getWriter().append("Served at: ").append(request.getContextPath());
+
         String bookToDeleteTitle = request.getParameter("bookToDelete");
         String bookToDeleteEmail = request.getParameter("userEmail");
         System.out.println(bookToDeleteEmail + ", " + bookToDeleteTitle);
@@ -47,6 +48,8 @@ public class BookController extends HttpServlet {
             e.printStackTrace();
         }
     }
+
+
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -89,41 +92,6 @@ public class BookController extends HttpServlet {
 
 
 
-//    /**
-//     * @see HttpServlet#doDelete(HttpServletRequest request, HttpServletResponse response)
-//     */
-//    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // TODO Auto-generated method stub
-//
-//
-//
-////        String userEmail = request.getParameter("userEmail");
-//
-//
-////        ArrayList<Book> listOfBooks = null;
-//
-//
-//
-//        try {
-//
-//
-//            String bookToDelete = request.getParameter("bookToDelete");
-//            if(!bookToDelete.equals("")){
-//                System.out.println("Book to delete is picked up as not blank");
-//               /* System.out.println(userEmail+ "|||" + bookToDelete);*/
-////                BookDAO.instance.delete(userEmail, bookToDelete);
-//                System.out.println("Book is deleted");
-////                request.setAttribute("myList", listOfBooks);
-////                request.getRequestDispatcher("showBooks.jsp").forward(request, response);
-//            }
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-////        request.setAttribute("myList", listOfBooks);
-////        request.getRequestDispatcher("showBooks.jsp").forward(request, response);
-//    }
+
 
 }

@@ -54,6 +54,17 @@ Book Title: <input type="text" name="bookToDelete"/><br>
 
 
 
+<h3>Click this button to delete your account</h3>
+<form method="get" action="UserController">
+    <c:forEach items="${userList}" var="user">
+
+        <input type="hidden" value="${user.email}" name="userEmailToDelete"/>
+    </c:forEach>
+    <input type="submit" value="Delete User"/>
+</form>
+
+
+
 
 
 

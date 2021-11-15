@@ -16,10 +16,10 @@ import model.UserDAO;
 
 
 /**
- * Servlet implementation class UserController
+ * Servlet implementation class RegisterController
  */
-@WebServlet("/UserController")
-public class UserController extends HttpServlet {
+@WebServlet("/RegisterController")
+public class RegisterController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     ArrayList<User> users = null;
     String currentUserEmail="";
@@ -27,7 +27,7 @@ public class UserController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserController() {
+    public RegisterController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,19 +38,6 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         response.getWriter().append("Served at: ").append(request.getContextPath());
-
-
-
-        String bookToDeleteEmail = request.getParameter("userEmailToDelete");
-
-        try {
-
-            UserDAO.instance.deleteUser(bookToDeleteEmail);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -71,35 +58,33 @@ public class UserController extends HttpServlet {
 
             //For loop to save new entries into database
             int count = 0;
-            for (int i = 0; i < users.size(); i++) {
-                if (email.equals(users.get(i).getEmail())) {
-
-                    if (password.equals(users.get(i).getpassword())) {
-                        count++;
-                        currentUser.add(users.get(i));
-                        currentUserEmail = users.get(i).getEmail();
-
-                        //CODE FOR USERS---------------------------------------------------------------------
-                    } else
-                        {
-                        System.out.println("Password is incorrect");
-//                        request.getRequestDispatcher("index.jsp").forward(request, response);
-                    }
-
+            for (int i = 0; i < users.size(); i++)
+            {
+                if (email.equals(users.get(i).getEmail()))
+                {
+                    count++;
                 }
-                else {
-                    System.out.println("Email is incorrect");
-//                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                }
+            }
 
-            }
-            if(count>0){
-                request.setAttribute("userList", currentUser);
-                request.getRequestDispatcher("showUser.jsp").forward(request, response);
-            }
-            else{
+
+            if (!email.equals("") && !password.equals("") & !n.equals("") && count == 0)
+            {
+                UserDAO.instance.save(u1.getEmail(), u1.getName(), u1.getpassword());
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
+
+            else if(email.equals("") || password.equals("") || !n.equals(""))
+                {
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+                }
+            else{
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+            }
+
+
+
+
+
         }
         catch (Exception e)
         {

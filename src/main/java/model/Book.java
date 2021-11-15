@@ -4,10 +4,12 @@ public class Book {
 
     private String title;
     private String author;
+    private String ID;
 
-    public Book(String t, String a) {
+    public Book(String ID,String t, String a) {
         this.title=t;
         this.author=a;
+        this.ID=ID;
     }
 
     public String getTitle() {
@@ -25,6 +27,10 @@ public class Book {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+    public String getID(){return ID;}
+
+    public void setID(String ID){this.ID = ID;}
 
 
 

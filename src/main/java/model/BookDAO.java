@@ -33,7 +33,7 @@ public enum BookDAO {
 
             if(rs.getString("USEREMAIL").equals(email)) {
 
-                Book b = new Book(rs.getString("BOOKTITLE"), rs.getString("BOOKAUTHOR"));
+                Book b = new Book(rs.getString("BOOKID"), rs.getString("BOOKTITLE"), rs.getString("BOOKAUTHOR"));
 books.add(b);
 
 
@@ -55,41 +55,40 @@ books.add(b);
     }
 
 
+    public static void updateTitle(String ID, String title) throws Exception{
 
-    public void delete(String email, String title) throws Exception
-    {
-        System.out.println("BOOKDAO : "+ email + ", " + title);
         Connection conn = getConnection();
-
-
-
-        PreparedStatement psmt = conn.prepareStatement("DELETE FROM BOOK WHERE USEREMAIL = '"+email+"' AND BOOKTITLE = '"+title+"'");
-        System.out.println(psmt);
-
-
+        System.out.println(ID + "," + title);
+        PreparedStatement psmt = conn.prepareStatement("UPDATE BOOK SET BOOKTITLE = '"+title+"' where BOOKID = '"+ID+"'");
         psmt.executeUpdate();
         psmt.close();
         conn.close();
     }
 
-    public ArrayList<User> list() throws Exception{
-
-        ArrayList<User> listOfUsers = new ArrayList();
+    public static void updateAuthor(String ID, String author) throws Exception{
 
         Connection conn = getConnection();
-
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM USER");
-        while (rs.next()) {
-            User u = new User(rs.getString("email"), rs.getString("name"), rs.getString("password"));
-            listOfUsers.add(u);
-
-        }
-        rs.close();
-        stmt.close();
+        System.out.println(ID + "," + author);
+        PreparedStatement psmt = conn.prepareStatement("UPDATE BOOK SET BOOKAUTHOR = '"+author+"' where BOOKID = '"+ID+"'");
+        psmt.executeUpdate();
+        psmt.close();
         conn.close();
-        return listOfUsers;
     }
+
+
+
+    public void delete(String email, String title) throws Exception
+    {
+        System.out.println("BOOKDAO : "+ email + ", " + title);
+        Connection conn = getConnection();
+        PreparedStatement psmt = conn.prepareStatement("DELETE FROM BOOK WHERE USEREMAIL = '"+email+"' AND BOOKTITLE = '"+title+"'");
+        System.out.println(psmt);
+        psmt.executeUpdate();
+        psmt.close();
+        conn.close();
+    }
+
+
 
 
 
