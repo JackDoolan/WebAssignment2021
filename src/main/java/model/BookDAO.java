@@ -56,11 +56,15 @@ books.add(b);
 
 
 
-    public static void delete(String email, String title) throws Exception{
-
+    public void delete(String email, String title) throws Exception
+    {
+        System.out.println("BOOKDAO : "+ email + ", " + title);
         Connection conn = getConnection();
-        PreparedStatement psmt = conn.prepareStatement("DELETE FROM BOOK WHERE USEREMAIL = '"+email+"' AND BOOKTITLE = '"+title+"'");
 
+
+
+        PreparedStatement psmt = conn.prepareStatement("DELETE FROM BOOK WHERE USEREMAIL = '"+email+"' AND BOOKTITLE = '"+title+"'");
+        System.out.println(psmt);
 
 
         psmt.executeUpdate();
@@ -86,5 +90,8 @@ books.add(b);
         conn.close();
         return listOfUsers;
     }
+
+
+
 
 }

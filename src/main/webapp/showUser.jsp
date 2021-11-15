@@ -17,6 +17,9 @@
 </c:forEach>
 <br>
 <h3>Add a Book</h3>
+
+
+
 //Form to add new book
 <form method="post" action="BookController">
     <c:forEach items="${userList}" var="user">
@@ -41,8 +44,11 @@
 
 
 <h3>Book to delete</h3>
-<form method="" action="BookController">
+<form method="get" action="BookController">
+<c:forEach items="${userList}" var="user">
 Book Title: <input type="text" name="bookToDelete"/><br>
+    <input type="hidden" value="${user.email}" name="userEmail"/>
+</c:forEach>
 <input type="submit" value="submit form"/>
 </form>
 
