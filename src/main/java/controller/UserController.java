@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Book;
 import model.BookDAO;
@@ -76,6 +77,11 @@ public class UserController extends HttpServlet {
 
                     if (password.equals(users.get(i).getpassword())) {
                         count++;
+
+                        HttpSession session = request.getSession();
+                        session.setAttribute("userName", users.get(i).getName());
+                        session.setAttribute("userEmail", email);
+
                         currentUser.add(users.get(i));
                         currentUserEmail = users.get(i).getEmail();
 

@@ -63,6 +63,8 @@ public class RegisterController extends HttpServlet {
                 if (email.equals(users.get(i).getEmail()))
                 {
                     count++;
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+
                 }
             }
 

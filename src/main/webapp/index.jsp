@@ -10,12 +10,20 @@
 <form method="post" action="UserController">
     Email: <input type="email" name="userEmail"/><br>
     Password: <input type="password" name="userPassword"/> <br>
-    <input type="submit" value="submit form"/>
+    <input type="submit" value="submit form" />
 </form>
 <br>
 
 <a href="register.jsp"> <h3>Click Here to Register</h3></a>
 <br><br><br><br>
+
+
+<h3>Click here to view all users</h3>
+
+
+<form method="post" action="AllUsersController">
+    <input type="submit" value="submit form" />
+</form>
 
 
 </body>

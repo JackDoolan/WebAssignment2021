@@ -49,6 +49,9 @@ public enum UserDAO {
     }
 
 
+
+
+
     public void save(String email, String name, String password) throws Exception{
 
         Connection conn = getConnection();
@@ -99,6 +102,28 @@ public enum UserDAO {
         psmt2.close();
         psmt.close();
         conn.close();
+    }
+
+
+
+    public ArrayList<User> selectAll() throws Exception {
+        Connection conn = getConnection();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM USER");
+        ArrayList<User> users = new ArrayList<>();
+        while(rs.next()) {
+
+
+
+                User b = new User(rs.getString("EMAIL"), rs.getString("NAME"), rs.getString("PASSWORD"));
+                users.add(b);
+
+
+
+
+        }
+        return users;
+
     }
 
 }

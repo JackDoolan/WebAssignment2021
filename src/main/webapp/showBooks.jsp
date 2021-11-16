@@ -22,6 +22,7 @@
   ID <input type="text" name="bookID"/><br>
   Update Name <input type="text" name="bookUpdateName"/> <br>
   Update Author <input type="text" name="bookUpdateAuthor"/> <br>
+  <input type="hidden" value="${sessionScope.userEmail}" name="bookUpdateEmail"></br>
   <input type="submit" value="Update"/>
 </form>
 

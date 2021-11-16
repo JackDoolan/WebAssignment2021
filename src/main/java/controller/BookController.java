@@ -20,7 +20,7 @@ import model.UserDAO;
 @WebServlet("/BookController")
 public class BookController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
+    ArrayList<Book> listOfBooks = null;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,7 +42,9 @@ public class BookController extends HttpServlet {
         try {
 
             BookDAO.instance.delete(bookToDeleteEmail, bookToDeleteTitle);
-
+            listOfBooks = BookDAO.instance.selectOne(bookToDeleteEmail);
+            request.setAttribute("myList", listOfBooks);
+            request.getRequestDispatcher("showBooks.jsp").forward(request, response);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -62,7 +64,7 @@ public class BookController extends HttpServlet {
          String userEmail = request.getParameter("userEmail");
 
 
-        ArrayList<Book> listOfBooks = null;
+
 
 
 

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Book;
 import model.BookDAO;
@@ -45,9 +46,19 @@ public class UpdateController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
 
+
+
+
       String ID = request.getParameter("bookID");
         String updateTitle = request.getParameter("bookUpdateName");
         String updateAuthor = request.getParameter("bookUpdateAuthor");
+        String userEmail = request.getParameter("bookUpdateEmail");
+
+
+        ArrayList<Book> listOfBooks = null;
+
+
+
 
 
         try {
@@ -55,14 +66,22 @@ public class UpdateController extends HttpServlet {
                 if(!updateTitle.equals("") && !updateAuthor.equals("")){
                    BookDAO.updateTitle(ID, updateTitle);
                    BookDAO.updateAuthor(ID,updateAuthor);
+                    listOfBooks = BookDAO.instance.selectOne(userEmail);
+                    request.setAttribute("myList", listOfBooks);
+                    request.getRequestDispatcher("showBooks.jsp").forward(request, response);
 
                 }
                 else if(!updateAuthor.equals("")){
                     BookDAO.updateAuthor(ID, updateAuthor);
-
+                    listOfBooks = BookDAO.instance.selectOne(userEmail);
+                    request.setAttribute("myList", listOfBooks);
+                    request.getRequestDispatcher("showBooks.jsp").forward(request, response);
                 }
                 else if(!updateTitle.equals("")){
                     BookDAO.updateTitle(ID, updateTitle);
+                    listOfBooks = BookDAO.instance.selectOne(userEmail);
+                    request.setAttribute("myList", listOfBooks);
+                    request.getRequestDispatcher("showBooks.jsp").forward(request, response);
 
                 }
 
